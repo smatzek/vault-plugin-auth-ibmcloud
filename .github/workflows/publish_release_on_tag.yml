@@ -42,7 +42,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Generate SHA256 sums
-        id: get_version
+        id: generate_sha256
         run: shasum -a 256 *.zip > vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
         working-directory: ./pkg
 
