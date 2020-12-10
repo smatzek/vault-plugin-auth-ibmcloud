@@ -32,8 +32,8 @@ jobs:
       - run: echo hello > world2.txt
       - uses: actions/upload-artifact@v2
           with:
-              name: my-artifact
-              path: world*.txt
+            name: my-artifact
+            path: world*.txt
       - uses: actions/upload-artifact@v2
           with:
             name: builtcode
