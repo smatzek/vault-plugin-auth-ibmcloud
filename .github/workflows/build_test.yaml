@@ -28,12 +28,10 @@ jobs:
 
       - name: Test
         run: make test-acc
-
-     - run: echo hello > world.txt
-     - run: echo hello > world2.txt
-
-     - uses: actions/upload-artifact@v2
-         with:
+      - run: echo hello > world.txt
+      - run: echo hello > world2.txt
+      - uses: actions/upload-artifact@v2
+          with:
               name: my-artifact
               path: world*.txt
       - uses: actions/upload-artifact@v2
