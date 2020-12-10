@@ -26,15 +26,15 @@ jobs:
       - name: Build
         run: make
 
+      - name: Get the release version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - name: Rename output zips
         run: |
           mv darwin_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_darwin_amd64.zip
           mv linux_arm64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
         working-directory: ./pkg
-
-      - name: Get the release version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Generate SHA256 sums
         id: generate_sha256
