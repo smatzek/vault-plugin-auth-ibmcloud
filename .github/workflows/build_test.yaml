@@ -14,7 +14,7 @@ jobs:
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
         with:
-          go-version: ^1.13
+          go-version: ^1.15
         id: go
 
       - name: Check out code into the Go module directory
@@ -24,7 +24,23 @@ jobs:
         run: make bootstrap
 
       - name: Build
-        run: make
+        run: make dev
 
       - name: Test
         run: make test-acc
+
+     - run: echo hello > world.txt
+     - run: echo hello > world2.txt
+
+     - uses: actions/upload-artifact@v2
+         with:
+              name: my-artifact
+              path: world*.txt
+      - uses: actions/upload-artifact@v2
+          with:
+            name: builtcode
+            path: pkg/linux_arm64/vault-plugin-auth-ibmcloud
+      - uses: actions/upload-artifact@v2
+          with:
+            name: builtcodezip
+            path: pkg/linux_arm64.zip
