@@ -28,7 +28,7 @@ jobs:
 
       - name: Test
         run: make test-acc
-#      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
             name: builtcode
             path: pkg/linux_arm64/vault-plugin-auth-ibmcloud
