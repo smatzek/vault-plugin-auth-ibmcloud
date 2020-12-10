@@ -32,7 +32,3 @@ jobs:
         with:
             name: builtcode
             path: pkg/linux_arm64/vault-plugin-auth-ibmcloud
-      - uses: actions/upload-artifact@v2
-        with:
-            name: builtcodezip
-            path: pkg/linux_arm64.zip
