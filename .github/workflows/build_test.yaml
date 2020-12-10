@@ -24,7 +24,7 @@ jobs:
         run: make bootstrap
 
       - name: Build
-        run: make dev
+        run: make
 
       - name: Test
         run: make test-acc
