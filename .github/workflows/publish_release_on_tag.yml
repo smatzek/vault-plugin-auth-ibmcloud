@@ -41,6 +41,11 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
+      - name: Generate SHA256 sums
+        id: get_version
+        run: shasum -a 256 *.zip > vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
+        working-directory: ./pkg
+
       - name: Upload linux_arm64
         uses: actions/upload-release-asset@v1
         env:
@@ -60,3 +65,13 @@ jobs:
           asset_path: ./pkg/darwin_amd64.zip
           asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_darwin_amd64.zip
           asset_content_type: application/zip
+
+      - name: Upload shasums file
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
+          asset_content_type: text/plain
