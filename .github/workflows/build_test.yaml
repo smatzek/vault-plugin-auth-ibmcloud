@@ -31,14 +31,14 @@ jobs:
       - run: echo hello > world.txt
       - run: echo hello > world2.txt
       - uses: actions/upload-artifact@v2
-          with:
+        with:
             name: my-artifact
             path: world*.txt
       - uses: actions/upload-artifact@v2
-          with:
+        with:
             name: builtcode
             path: pkg/linux_arm64/vault-plugin-auth-ibmcloud
       - uses: actions/upload-artifact@v2
-          with:
+        with:
             name: builtcodezip
             path: pkg/linux_arm64.zip
