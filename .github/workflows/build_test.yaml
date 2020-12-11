@@ -3,9 +3,10 @@ name: make-branch
 on:
   push:
     branches: [ actiontest ]
+  pull_request:
+    branches: [ actiontest ]
 
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -24,7 +25,7 @@ jobs:
         run: make bootstrap
 
       - name: Build
-        run: make
+        run: make dev
 
       - name: Test
         run: make test-acc
