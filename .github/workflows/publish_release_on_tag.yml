@@ -30,10 +30,24 @@ jobs:
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
-      - name: Rename output zips
+      - name: Rename output zips to contain version number
         run: |
           mv darwin_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_darwin_amd64.zip
+          mv freebsd_386.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_386.zip
+          mv freebsd_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_amd64.zip
+          mv freebsd_arm.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_arm.zip
+          mv linux_386.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_386.zip
+          mv linux_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_amd64.zip
+          mv linux_arm.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm.zip
           mv linux_arm64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
+          mv netbsd_386.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_386.zip
+          mv netbsd_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_amd64.zip
+          mv netbsd_arm.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_arm.zip
+          mv openbsd_386.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_386.zip
+          mv openbsd_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_amd64.zip
+          mv solaris_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_solaris_amd64.zip
+          mv windows_386.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_386.zip
+          mv windows_amd64.zip vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_amd64.zip
         working-directory: ./pkg
 
       - name: Generate SHA256 sums
@@ -52,15 +66,15 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload linux_arm64
+      - name: Upload shasums file
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
-          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
-          asset_content_type: application/zip
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
+          asset_content_type: text/plain
 
       - name: Upload darwin_amd64
         uses: actions/upload-release-asset@v1
@@ -72,12 +86,153 @@ jobs:
           asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_darwin_amd64.zip
           asset_content_type: application/zip
 
-      - name: Upload shasums file
+      - name: Upload freebsd_386
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
-          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_SHA256SUMS
-          asset_content_type: text/plain
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_386.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_386.zip
+          asset_content_type: application/zip
+
+      - name: Upload freebsd_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_amd64.zip
+          asset_content_type: application/zip
+
+      - name: Upload freebsd_arm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_arm.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_freebsd_arm.zip
+          asset_content_type: application/zip
+
+      - name: Upload linux_386
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_386.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_386.zip
+          asset_content_type: application/zip
+
+      - name: Upload linux_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_amd64.zip
+          asset_content_type: application/zip
+
+      - name: Upload linux_arm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm.zip
+          asset_content_type: application/zip
+
+      - name: Upload linux_arm64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_linux_arm64.zip
+          asset_content_type: application/zip
+
+      - name: Upload netbsd_386
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_386.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_386.zip
+          asset_content_type: application/zip
+
+      - name: Upload netbsd_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_amd64.zip
+          asset_content_type: application/zip
+
+      - name: Upload netbsd_arm
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_arm.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_netbsd_arm.zip
+          asset_content_type: application/zip
+
+      - name: Upload openbsd_386
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_386.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_386.zip
+          asset_content_type: application/zip
+
+      - name: Upload openbsd_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_openbsd_amd64.zip
+          asset_content_type: application/zip
+
+      - name: Upload solaris_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_solaris_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_solaris_amd64.zip
+          asset_content_type: application/zip
+
+      - name: Upload windows_386
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_386.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_386.zip
+          asset_content_type: application/zip
+
+      - name: Upload windows_amd64
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pkg/vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_amd64.zip
+          asset_name: vault-plugin-auth-ibmcloud_${{ steps.get_version.outputs.VERSION }}_windows_amd64.zip
+          asset_content_type: application/zip
+
