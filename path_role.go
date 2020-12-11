@@ -11,6 +11,7 @@ import (
 	"strings"
 )
 
+// add some comment to trigger the PR
 // pathsRole returns the path configurations for the CRUD operations on roles
 func pathsRole(b *ibmCloudAuthBackend) []*framework.Path {
 	p := []*framework.Path{
