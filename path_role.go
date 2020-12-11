@@ -81,7 +81,7 @@ func (b *ibmCloudAuthBackend) role(ctx context.Context, s logical.Storage, name 
 	raw, err := s.Get(ctx, "role/"+strings.ToLower(name))
 	if err != nil {
 		return nil, err
-	}
+
 	if raw == nil {
 		return nil, nil
 	}
