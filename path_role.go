@@ -80,8 +80,8 @@ type ibmCloudRole struct {
 func (b *ibmCloudAuthBackend) role(ctx context.Context, s logical.Storage, name string) (*ibmCloudRole, error) {
 	raw, err := s.Get(ctx, "role/"+strings.ToLower(name))
 	if err != nil {
-		return nil, err
-
+		return nil, err, somethingelse
+	}
 	if raw == nil {
 		return nil, nil
 	}
