@@ -196,10 +196,10 @@ func (b *ibmCloudAuthBackend) pathRoleCreateUpdate(ctx context.Context, req *log
 		role.BoundSubscriptionsIDs = boundSubscriptionsIDs.([]string)
 	}
 
-	//if len(role.BoundSubscriptionsIDs) == 0 &&
-	//	len(role.BoundAccessGroupIDs) == 0 {
-	//	return logical.ErrorResponse("must have at least one bound constraint when creating/updating a role"), nil
-	//}
+	if len(role.BoundSubscriptionsIDs) == 0 &&
+		len(role.BoundAccessGroupIDs) == 0 {
+		return logical.ErrorResponse("must have at least one bound constraint when creating/updating a role"), nil
+	}
 
 	// Check that the TTL value provided is less than the MaxTTL.
 	// Sanitizing the TTL and MaxTTL is not required now and can be performed
