@@ -1,4 +1,4 @@
-name: make-branch
+name: Build and test
 
 on:
   push:
